@@ -1,0 +1,44 @@
+﻿@model Leilao.DTO.ProdutoDTO
+@{
+    ViewBag.Title = "Cadastrar Produto";
+}
+
+@using (Html.BeginForm("Create", "Produto", FormMethod.Post, new { @class = "form-group", enctype = "multipart/form-data" }))
+{
+    <br />
+    <div class="jumbotron">
+
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>Cadastrar Produto</legend>
+
+            @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+            <div class="container">
+                @Html.ValidationMessageFor(Model => Model.Nome, null, new { @class = "valid-feedback" })
+                @Html.LabelFor(Model => Model.Nome, null, new { @class = "control-label col-md-11" })
+                @Html.TextBoxFor(Model => Model.Nome,
+                    new
+                    {
+                        @class = "form-control",
+                        @placeholder = "Digite seu nome completo."
+
+                    })<br />
+
+                @Html.ValidationMessageFor(Model => Model.Valor, null, new { @class = "valid-feedback" })
+                @Html.LabelFor(Model => Model.Valor, null, new { @class = "control-label col-md-11" })
+                @Html.TextBoxFor(Model => Model.Valor,
+                    new
+                    {
+                        @class = "form-control",
+                        @placeholder = "Digite o valor do produto.",
+                        @type = "number",
+                        @step = "0.01"
+                    })<br />
+            </div>
+        </fieldset>
+        <input type="submit" value="Cadastrar" class="btn btn-success" />
+    </div>
+}
+
+

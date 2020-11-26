@@ -1,0 +1,46 @@
+﻿@using System.Web.Optimization
+@model Leilao.DTO.PessoaDTO
+@{
+    ViewBag.Title = "Login";
+}
+<link href="~/Content/estiloLogin.css" rel="stylesheet" />
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <form class="modal-content animate">
+            <div class="form-group">
+                <div class="text-info">@Html.LabelFor(Model => Model.Email)</div>
+                @Html.TextBoxFor(Model => Model.Email,
+                    new
+                    {
+                        @class = "form-control",
+                        @placeholder = "Ex: exemplo@exemplo.com"
+
+                    })
+                @Html.ValidationMessageFor(Model => Model.Email)<br />
+
+                <div class="text-info">@Html.LabelFor(Model => Model.Senha)</div>
+                @Html.PasswordFor(Model => Model.Senha,
+                    new
+                    {
+                        @class = "form-control",
+                        @placeholder = "Digite aqui sua senha."
+
+                    })
+                @Html.ValidationMessageFor(Model => Model.Senha, null, new { @class = "text-danger" })<br />
+
+
+                @Html.ValidationSummary(true, null,
+                    new { @class = "text-danger" })
+                <div class="card mb-3">
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <p class="text-center text-muted"><b>Não é registrado ainda?</b></p>
+                    <p class="text-center text-muted"><a href='@Url.Action("Create", "Pessoa")'><strong>Cadastre-se agora!</strong></a><br /><b>É muito fácil e leva apenas 1&nbsp;minuto!</b></p>
+                </div>
+            </div>
+        </form>
+    }
+</body>
+
